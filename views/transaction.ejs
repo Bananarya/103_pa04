@@ -1,0 +1,24 @@
+
+<div class="jumbotron">
+    <h1> ToDo List for <%= user.googlename %> </h1>
+    <p> Here is your list of things to do! </p>
+
+    <% items.forEach(item => { %>
+        <a href="/transaction/remove/<%=item._id %>">X</a>
+        ::
+        <%= item.description %>
+        <%= item.amount %>
+        <%= item.category %>
+        <%= item.Date %>
+       <br>
+    <% }) %>
+
+      <form method="post" action="transaction">
+          <input type="text" name="item" value="description"><br>
+          <input type="text" name="amount" value="amount"><br>
+          <input type="text" name="category" value="category"><br>
+          <input type="text" name="Date" value="Date"><br>
+          <input type="submit" value="store">
+      </form>
+
+  </div>
