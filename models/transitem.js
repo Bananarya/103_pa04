@@ -8,6 +8,7 @@ var toDoItemSchema = Schema( {
   description: String,
   amount: Number,
   category: String,
+  date:String,
   userId: ObjectId
 } );
 
