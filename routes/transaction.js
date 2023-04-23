@@ -2,8 +2,10 @@
   todo.js -- Router for the ToDoList
 */
 const express = require('express');
+const transitem = require('../models/transitem');
 const router1 = express.Router();
 const Item = require('../models/transitem')
+const User = require('../models/User')
 
 
 /*
@@ -45,14 +47,53 @@ router1.post('/transaction',
       res.redirect('/transaction')
 });
 
-
-router.get('/transaction/remove/:itemId',
+router1.get('/transaction/remove/:itemId',
   isLoggedIn,
   async (req, res, next) => {
       console.log("inside /transaction/remove/:itemId")
-      await ToDoItem.deleteOne({_id:req.params.itemId});
+      await transitem.deleteOne({_id:req.params.itemId});
       res.redirect('/transaction')
 });
+
+router1.get('/transaction/edit/:itemId',
+  isLoggedIn,
+  async (req, res, next) => {
+      console.log("inside /transaction/edit/:itemId")
+      const item = 
+      await transitem.findById({_id:req.params.itemId});
+      res.locals.item = item
+      res.render('edit')
+      
+});
+
+router1.post('/transaction/edit/transaction/Update',
+  isLoggedIn,
+  async (req, res, next) => {
+      const {itemId,description,amount,category,date} = req.body;
+      console.log("inside /transaction/:itemId");
+      await transitem.findOneAndUpdate(
+        {_id:itemId},
+        {$set: {description,amount,category,date}} );
+      res.redirect('/transaction')
+});
+
+router1.get('/transaction/groupByCategory',
+  isLoggedIn,
+  async (req, res, next) => {
+      let results =
+            await transitem.aggregate(
+                [ 
+                  {$group:{
+                    _id:'$category',
+                    amount:{$sum:"$amount"}
+                    }},             
+                ])
+              
+
+        //res.json(results)
+        res.render('groupByCategory',{results})
+});
+
 
 
 module.exports = router1;
