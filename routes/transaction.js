@@ -45,12 +45,14 @@ router1.post('/transaction',
       res.redirect('/transaction')
 });
 
-router1.get('/transaction/remove/:description',
+
+router.get('/transaction/remove/:itemId',
   isLoggedIn,
   async (req, res, next) => {
-      console.log("inside /todo/remove/:description")
-      await Item.deleteOne({_id:req.params.description});
+      console.log("inside /transaction/remove/:itemId")
+      await ToDoItem.deleteOne({_id:req.params.itemId});
       res.redirect('/transaction')
 });
+
 
 module.exports = router1;

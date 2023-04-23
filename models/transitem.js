@@ -9,7 +9,7 @@ var toDoItemSchema = Schema( {
   amount: Number,
   category: String,
   date:String,
-  userId: ObjectId
+  userId: {type:ObjectId, ref:'user' }
 } );
 
 module.exports = mongoose.model( 'transitem', toDoItemSchema );
