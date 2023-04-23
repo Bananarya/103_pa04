@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm">
         <a class="btn btn-lg btn-primary"
-            href="?show=completed">group by catagory</a>
+            href="/transaction/groupByCategory">group by catagory</a>
         </div>
         <div class="col-sm">
         <a class="btn btn-lg btn-primary"
@@ -30,6 +30,29 @@
 
     
 
+<!-- 
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm">
+            description
+        </div>
+        <div class = "col-sm">
+            amount
+        </div>
+        <div class = "col-sm">
+            category
+        </div>
+        <div class = "col-sm">
+            date
+        </div>
+        <div class = "col-sm">
+            delete
+        </div>
+        <div class = "col-sm">
+            edit
+        </div>
+    </div>
+</div> -->
 
 
 <table class="table table-bordered table-striped">
@@ -56,11 +79,9 @@
                 </a>
                 </td>    
                 <td>
-                <span class = "">
                 <a href="/transaction/edit/<%=item._id %>">
-                    <i class="bi bi-pencil-square" style="font-size: 0.73em;"></i>
+                    <i class="bi bi-pencil-square"></i>
                     </a>
-                </span>
                 </td>
             </tr>
             
@@ -69,6 +90,15 @@
     </tbody>
 </table>
 
+<!-- <% items.forEach(item => { %>
+    <a href="/transaction/remove/<%=item._id %>">X</a>
+    ::
+    <%= item.description %>
+    <%= item.amount %>
+    <%= item.category %>
+    <%= item.date %>
+    <br>
+<% }) %> -->
 
     <form method="post" action="transaction">
         <input type="text" name="item" placeholder="description"><br>
@@ -77,3 +107,4 @@
         <input type="text" name="date" placeholder="date"><br>
         <input type="submit" value="store">
     </form>
+
