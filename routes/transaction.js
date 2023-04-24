@@ -88,12 +88,61 @@ router1.get('/transaction/groupByCategory',
                     amount:{$sum:"$amount"}
                     }},             
                 ])
-              
-
         //res.json(results)
         res.render('groupByCategory',{results})
 });
 
+router1.get('/transaction/sortByCategory',
+  isLoggedIn,
+  async (req, res, next) => {
+      let results =
+            await transitem.aggregate(
+                [ 
+                  {$sort:{"category": 1}},             
+                ])
+              
+        //res.json(results)
+        res.render('sortByCategory',{results})
+});
+
+router1.get('/transaction/sortByAmount',
+  isLoggedIn,
+  async (req, res, next) => {
+      let results =
+            await transitem.aggregate(
+                [ 
+                  {$sort:{amount: 1}},             
+                ])
+              
+        //res.json(results)
+        res.render('sortByAmount',{results})
+});
+
+router1.get('/transaction/sortByDescription',
+  isLoggedIn,
+  async (req, res, next) => {
+      let results =
+            await transitem.aggregate(
+                [ 
+                  {$sort:{description: 1}},             
+                ])
+              
+        //res.json(results)
+        res.render('sortByDescription',{results})
+});
+
+router1.get('/transaction/sortByDate',
+  isLoggedIn,
+  async (req, res, next) => {
+      let results =
+            await transitem.aggregate(
+                [ 
+                  {$sort:{"date": 1}},             
+                ])
+              
+        //res.json(results)
+        res.render('sortByDate',{results})
+});
 
 
 module.exports = router1;
